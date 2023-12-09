@@ -2,6 +2,7 @@ from havoc import Demon, RegisterCommand
 import json
 import re
 import os
+import uuid
 
 def ipconfig_with_callback( demonID, callback, *params ):
     demon  : Demon  = None
@@ -944,7 +945,8 @@ def bofbelt_report( demonID, bof_output ):
 # output : the content of all CALLBACK_OUTPUT
 # error  : the content of all CALLBACK_ERROR
 def bofbelt_callback( demonID, TaskID, worked, output, error ):
-    filename = '/tmp/bofbelt.json'
+    randuuid = uuid.uuid4()
+    filename = f"/tmp/bofbelt{randuuid}.json"
 
     # first, get the json that contains all the previous BOF output
     try:
